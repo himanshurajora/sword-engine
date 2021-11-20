@@ -24,7 +24,7 @@ window.onload = function () {
     mousey = Math.round(e.clientY - cRect.top)
 
   })
-
+  
   var lasttime = performance.now()
   var point1 = new Vector(100, 100)
   var point2 = new Vector(mousex, mousey)
@@ -41,29 +41,7 @@ window.onload = function () {
   var velocity = new Vector(1, 1)
   
   function render() {
-    context.clearRect(0, 0, width, height)
-
-
-    // points.forEach(p => {
-    //   p.x = p.x + Math.random() * 2 - 1
-    //   p.y = p.y + Math.random() * 2 - 1
-    //   shapes.drawPoint(context, p, 2, "red")
-    // })
-  
-      // shapes.drawLine(context, point1, new Vector(mousex, mousey), "blue")
       
-      var distance =  distanceBetweenVectors(point1, new Vector(mousex, mousey))
-      shapes.drawPoint(context, new Vector(mousex, mousey), 2, "red")
-      
-      point1 = moveVectorByVelocity(point1, velocity)
-      velocity = getNewVelocityByAccelation(velocity, new Vector(0.01, 0.5))
-      // // get the next point where the poin1 should move
-      // point1 = moveTowardVector(point1, new Vector(mousex, mousey), 1)
-      shapes.drawPoint(context, point1, 2, "red")
-      var currenttime = performance.now()
-      var fps = calculateFPS(lasttime, currenttime)
-      showFPS(context, parseInt(fps.toString()), "blue")
-      lasttime = currenttime
       requestAnimationFrame(render)
     }
     render()
