@@ -126,10 +126,3 @@ export function moveTowardVector(vector1: Vector, vector2: Vector, distance: num
     return new Vector(x, y)
 }
 
-export function moveVectorByVelocity(vector : Vector, velocity : Vector) : Vector{
-    return vector.add(velocity)
-}
-
-export function getNewVelocityByAccelation(velocity : Vector, accelation : Vector) : Vector{
-    return velocity.add(accelation)
-}
