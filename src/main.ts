@@ -1,10 +1,14 @@
 // import {Vector} from './helpers/vectors'
 
-import { angleBetweenVectors, distanceBetweenVectors, getNewVelocityByAccelation, moveTowardVector, moveVectorByVelocity, Vector, VectorAround } from "./utils/vector";
+import { angleBetweenVectors, distanceBetweenVectors, getNewVelocityByAccelation, moveTowardVector, moveVectorByVelocity, VectorAround } from "./utils/vector";
 // function to draw polygon using given vertices
 import * as shapes from "./utils/shapes";
 import { rotateVector, translateVector } from "./utils/transformations";
 import { calculateFPS, showFPS } from "./utils/devdata";
+import {Vector} from './GraphicsEngine/index'
+interface Window {
+  context : CanvasRenderingContext2D
+}
 
 var point1 = new Vector(100, 100);
 
@@ -40,8 +44,19 @@ window.onload = function () {
 
   var velocity = new Vector(1, 1)
   
-  function render() {
-      
+  
+  function setup() {
+
+    var data = "data"
+
+  }
+  function render() { 
+      context.clearRect(0, 0, width, height)
+      shapes.drawPoint(context, new Vector(mousex, mousey), 6)
+      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
+      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
+      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
+      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
       requestAnimationFrame(render)
     }
     render()
