@@ -1,16 +1,10 @@
 // import {Vector} from './helpers/vectors'
 
 import { angleBetweenVectors, distanceBetweenVectors, getNewVelocityByAccelation, moveTowardVector, moveVectorByVelocity, VectorAround } from "./utils/vector";
-// function to draw polygon using given vertices
-import * as shapes from "./utils/shapes";
+
 import { rotateVector, translateVector } from "./utils/transformations";
 import { calculateFPS, showFPS } from "./utils/devdata";
 import {Vector} from './GraphicsEngine/index'
-interface Window {
-  context : CanvasRenderingContext2D
-}
-
-var point1 = new Vector(100, 100);
 
 window.onload = function () {
   var canvas = document.getElementById("canvas") as HTMLCanvasElement
@@ -26,38 +20,24 @@ window.onload = function () {
     var cRect = canvas.getBoundingClientRect()
     mousex = Math.round(e.clientX - cRect.left)
     mousey = Math.round(e.clientY - cRect.top)
-
+    
   })
   
   var lasttime = performance.now()
-  var point1 = new Vector(100, 100)
-  var point2 = new Vector(mousex, mousey)
-
-  console.log("angle is ; ", angleBetweenVectors(point1, new Vector(3, 3)))
-
-  var points = [] as Vector[]
-
-
-  for(var i = 0; i < 1000; i++){
-    points.push(new Vector(Math.random() * width, Math.random() * height))
-  }
-
-  var velocity = new Vector(1, 1)
-  
-  
-  function setup() {
-
-    var data = "data"
-
-  }
-  function render() { 
+ 
+ function render() { 
       context.clearRect(0, 0, width, height)
       shapes.drawPoint(context, new Vector(mousex, mousey), 6)
       shapes.drawPoint(context, new Vector(100, 100), 5, "red")
       shapes.drawPoint(context, new Vector(100, 100), 5, "red")
       shapes.drawPoint(context, new Vector(100, 100), 5, "red")
       shapes.drawPoint(context, new Vector(100, 100), 5, "red")
+
+      var currenttime = performance.now()
+      var fps = calculateFPS(lasttime, currenttime)
+      showFPS(context, parseInt(fps.toString()), "red")
+      lasttime = currenttime
       requestAnimationFrame(render)
-    }
-    render()
   }
+  render()
+}
