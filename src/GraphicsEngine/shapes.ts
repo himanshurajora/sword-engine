@@ -1,81 +1,94 @@
-// draw a point at the given coordinates
-export function point(context: CanvasRenderingContext2D, x: number, y: number, size: number, color: string | CanvasGradient | CanvasPattern = "black") {
-    context.fillStyle = color;
-    context.beginPath();
-    context.arc(x, y, size, 0, 2 * Math.PI);
-    context.fill();
-}
+import { Vector } from "../GraphicsEngine/index";
+// class for various shapes
+declare const window: Window & typeof globalThis & { context: CanvasRenderingContext2D }
 
-// draw a line from (x1, y1) to (x2, y2)
-export function line(context: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, color: string | CanvasGradient | CanvasPattern = "black", width: number = 2, dashed: boolean = false, dashLength: number = 5, dashGap: number = 5) {
-    context.strokeStyle = color;
-    context.lineWidth = width;
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.stroke();
-    if (dashed) {
-        context.setLineDash([dashLength, dashGap]);
+export class Shapes {
+    private context: CanvasRenderingContext2D
+    
+    constructor() {
+        this.context = window.context
+        this.context.fillStyle = "trasparent"
+        this.context.strokeStyle = "black"
+        this.context.lineWidth = 1
+        this.context.lineCap = "round"
     }
-}
 
-// draw a rectangle with top-left corner at (x, y)
-export function rect(context: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, stroke: string = "black", strokeWidth: number = 2, fill: boolean = false, color: string | CanvasGradient | CanvasPattern = "black") {
-    context.strokeStyle = stroke;
-    context.fillStyle = color;
-    context.lineWidth = strokeWidth;
-    context.beginPath();
-    context.rect(x, y, width, height);
-    if (fill) {
-        context.fill();
+    public setLineCap(lineCap: CanvasLineCap) {
+        this.context.lineCap = lineCap
     }
-    context.stroke();
-}
-
-// draw a circle with center at (x, y) and given radius
-export function drawCircle(context: CanvasRenderingContext2D, point: Vector, radius: number, stroke: string = "black", strokeWidth: number = 2, fill: boolean = false, color: string | CanvasGradient | CanvasPattern = "black") {
-    context.beginPath();
-    context.arc(point.x, point.y, radius, 0, Math.PI * 2);
-    if (fill) {
-        context.fillStyle = color;
-        context.fill();
+    public setStrokeStyle(stroke: number, color: string) {
+        this.context.strokeStyle = color
+        this.context.lineWidth = stroke
     }
-    context.lineWidth = strokeWidth;
-    context.strokeStyle = stroke;
-    context.stroke();
-}
 
-
-// draw an ellipse with center at (x, y) and given radius
-export function ellipse(context: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, stroke: string = "black", strokeWidth: number = 2, fill: boolean = false, color: string | CanvasGradient | CanvasPattern = "black") {
-    context.beginPath();
-    context.ellipse(x, y, width, height, 0, 0, 2 * Math.PI);
-    if (fill) {
-        context.fillStyle = color;
-        context.fill();
+    public setFillStyle(color: string) {
+        this.context.fillStyle = color
     }
-    context.lineWidth = strokeWidth;
-    context.strokeStyle = stroke;
-    context.stroke();
-}
 
-// draw a polygon with given points
-export function polygon(context: CanvasRenderingContext2D, points: Vector[], stroke: string = "black", strokeWidth: number = 2, fill: boolean = false, color: string | CanvasGradient | CanvasPattern = "black") {
-    context.beginPath();
-    context.moveTo(points[0].x, points[0].y);
-    for (let i = 1; i < points.length; i++) {
-        context.lineTo(points[i].x, points[i].y);
+    public setFont(font: string) {
+        this.context.font = font
     }
-    context.closePath();
-    if (fill) {
-        context.fillStyle = color;
-        context.fill();
+
+    public setColor(color: string) {
+        this.context.fillStyle = color
     }
-    context.lineWidth = strokeWidth;
-    context.strokeStyle = stroke;
-    context.stroke();
+    public drawImage(image: HTMLImageElement, point: Vector, width: number, height: number) {
+        this.context.drawImage(image, point.getX(), point.getY(), width, height)
+    }
+    public drawPoint(point: Vector, width: number) {
+        this.context.beginPath();
+        this.context.arc(point.getX(), point.getY(), width, 0, Math.PI * 2);
+        this.context.fill();
+    }
+
+    public drawPolygon(points: Vector[]) {
+        this.context.beginPath();
+
+        this.context.moveTo(points[0].getX(), points[0].getY());
+        for (let i = 1; i < points.length; i++) {
+            this.context.lineTo(points[i].getX(), points[i].getY());
+        }
+
+        this.context.closePath();
+        this.context.fill();
+        this.context.stroke();
+    }
+
+
+    public drawRectangle(point: Vector, width: number, height: number) {
+        this.context.beginPath();
+        this.context.rect(point.getX(), point.getY(), width, height);
+        this.context.fill();
+        this.context.stroke();
+    }
+
+    public drawCircle(point: Vector, radius: number) {
+        this.context.beginPath();
+        this.context.arc(point.getX(), point.getY(), radius, 0, Math.PI * 2);
+        this.context.fill();
+        this.context.stroke();
+    }
+
+    public drawEllipse(point: Vector, width: number, height: number ) {
+        this.context.beginPath();
+        this.context.ellipse(point.getX(), point.getY(), width, height, 0, 0, 2 * Math.PI);
+        this.context.fill();
+        this.context.stroke();
+    }
+
+    public drawLine(point1: Vector, point2: Vector) {
+        this.context.beginPath();
+        this.context.moveTo(point1.getX(), point1.getY());
+        this.context.lineTo(point2.getX(), point2.getY())
+        this.context.stroke();
+    }
+
+    public clear() {
+        this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    public drawText(text: string, point: Vector) {
+        this.context.fillText(text, point.getX(), point.getY())
+    }
+    
 }
-
-
-
-

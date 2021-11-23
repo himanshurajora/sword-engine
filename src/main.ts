@@ -1,14 +1,15 @@
 // import {Vector} from './helpers/vectors'
+declare const window : Window & typeof globalThis & {context : CanvasRenderingContext2D}
 
-import { angleBetweenVectors, distanceBetweenVectors, getNewVelocityByAccelation, moveTowardVector, moveVectorByVelocity, VectorAround } from "./utils/vector";
-
-import { rotateVector, translateVector } from "./utils/transformations";
 import { calculateFPS, showFPS } from "./utils/devdata";
 import {Vector} from './GraphicsEngine/index'
+import { Shapes } from "./GraphicsEngine/shapes";
+
 
 window.onload = function () {
   var canvas = document.getElementById("canvas") as HTMLCanvasElement
-  var context = canvas.getContext("2d") as CanvasRenderingContext2D
+  var context = window.context = canvas.getContext("2d") as CanvasRenderingContext2D
+  
   canvas.style.cursor = "none"
   var height = canvas.height = window.innerHeight
   var width = canvas.width = window.innerWidth
@@ -25,13 +26,15 @@ window.onload = function () {
   
   var lasttime = performance.now()
  
+  var Shape = new Shapes()
  function render() { 
-      context.clearRect(0, 0, width, height)
-      shapes.drawPoint(context, new Vector(mousex, mousey), 6)
-      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
-      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
-      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
-      shapes.drawPoint(context, new Vector(100, 100), 5, "red")
+
+      Shape.clear()
+
+      Shape.drawPoint(new Vector(mousex, mousey), 5)
+      Shape.setStrokeStyle(5, "red")
+      Shape.setLineCap("round")
+      Shape.drawLine(new Vector(mousex, mousey), new Vector(mousex + 100, mousey + 100))
 
       var currenttime = performance.now()
       var fps = calculateFPS(lasttime, currenttime)
