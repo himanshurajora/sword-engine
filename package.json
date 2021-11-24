@@ -1,0 +1,24 @@
+{
+  "name": "sword-game-engine",
+  "version": "0.0.111",
+  "description": "Simple Javascript graphics and game engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshurajora/sword-engine.git"
+  },
+  "keywords": [
+    "gameengine",
+    "graphics",
+    "canvas"
+  ],
+  "author": "Himanshu Jangid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/himanshurajora/sword-engine/issues"
+  },
+  "homepage": "https://github.com/himanshurajora/sword-engine#readme"
+}
