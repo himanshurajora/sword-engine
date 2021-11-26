@@ -1,4 +1,4 @@
-import { Vector, angleBetweenVectors } from "./vector";
+import { Vector } from "./vector";
 
 export function drawPoint(ctx : CanvasRenderingContext2D, point : Vector, width: number, color: string = "black") {
     ctx.beginPath();
