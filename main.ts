@@ -63,20 +63,42 @@ var lasttime = performance.now()
 var Shape = new Shapes()
 
 var initialVelocity = new Vector(0, 0)
-initialVelocity.setLength(10)
-initialVelocity.setAngle(-Math.PI / 2)
-var particle = new Particle(new Vector(400, 400), 5, 1, "black", initialVelocity, "Particle");
-var sun = new Particle(new Vector(width/2, height/2), 20, 20000, "yellow", new Vector(0, 0), "Sun");
+// initialVelocity.setLength(10)
+// initialVelocity.setAngle(-Math.PI / 2)
+var particle = new Particle(new Vector(500, 400), 5, 1, "black", initialVelocity, "Particle");
+var sun = new Particle(new Vector(width/2, height/2), 5, 15000, "yellow", new Vector(0, 0), "Sun");
+
+particle.hasDefaultGravity = true
+
+var particles : Particle[] = []
+
+for(var i = 0; i < 100; i++){
+    var p = new Particle(new Vector(Math.random() * width, Math.random() * height), Math.random() * 5, Math.random() * 10, "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")", new Vector(0, 0), "Particle");
+    p.hasDefaultGravity = true
+    particles.push(p)
+}
+
+// the render function
 function render() {
 
+
   Shape.clear()
-
-  particle.gravitateTo(sun)
   
-  particle.draw()
-  sun.draw()
+  Shape.drawPoint(new Vector(mousex, mousey), 5)
   
-
+  Shape.drawCircle(particle.position, particle.width)
+  
+  for(var i = 0; i < particles.length; i++){
+    particles[i].draw()
+    if(particles[i].position.y > height){
+        particles.splice(i, 1)
+        var p = new Particle(new Vector(Math.random() * width, 0), Math.random() * 5, Math.random() * 10, "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")", new Vector(0, 0), "Particle");
+        p.hasDefaultGravity = true
+        particles.push(p)
+        
+      }
+  }
+ 
   var currenttime = performance.now()
   var fps = calculateFPS(lasttime, currenttime)
   showFPS(parseInt(fps.toString()), "red")

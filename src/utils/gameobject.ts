@@ -9,6 +9,8 @@ export class GameObject {
     public color : string
     public velocity : Vector
     public name : string
+    public hasDefaultGravity : boolean = false
+    public terminalVelocity : number = 10
 
     constructor(position : Vector, width: number, color: string = "black",velocity : Vector = new Vector(0,0) , name: string = "GameObject"){
         this.position = position
@@ -31,6 +33,7 @@ export class Particle extends GameObject {
 
     public draw(){
 
+        
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
         
@@ -38,7 +41,13 @@ export class Particle extends GameObject {
         globalThis.context.beginPath()
         globalThis.context.arc(this.position.x,this.position.y,this.width,0,2*Math.PI)
         globalThis.context.fill()
-
+        
+        if(this.hasDefaultGravity){
+            if(this.velocity.y < this.terminalVelocity){
+                this.velocity.y += 0.1
+            }
+            
+        }
     }
 
     public gravitateTo(particle: Particle){
