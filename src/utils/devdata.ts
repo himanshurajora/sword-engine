@@ -7,9 +7,9 @@ export function calculateFPS(lasttime: number, currenttime: number) {
 
 
 // function to show fps
-export function showFPS(context: CanvasRenderingContext2D, fps: number, color: string = "black") {
-    context.fillStyle = color
-    context.font = "20px Arial"
-    context.fillText(`FPS: ${fps}`, 10, 20)
+export function showFPS(fps: number, color: string = "black") {
+    globalThis.context.fillStyle = color
+    globalThis.context.font = "20px Arial"
+    globalThis.context.fillText(`FPS: ${fps}`, 10, 20)
 }
 
