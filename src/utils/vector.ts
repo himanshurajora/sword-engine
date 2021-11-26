@@ -11,24 +11,28 @@ export class Vector implements Vector {
         this.length = Math.sqrt(this.x * this.x + this.y * this.y)
     }
 
-    public add(v: Vector): Vector {
-        return new Vector(this.x + v.x, this.y + v.y)
+    public add(v: Vector) : Vector {
+        this.x += v.x
+        this.y += v.y
+        return this
     }
 
-    public sub(v: Vector): Vector {
-        return new Vector(this.x - v.x, this.y - v.y)
-    }
-
-    public mul(v: Vector): Vector {
-        return new Vector(this.x * v.x, this.y * v.y)
-    }
-
-    public div(v: Vector): Vector {
-        return new Vector(this.x / v.x, this.y / v.y)
+    public subtract(v: Vector) : Vector {
+        this.x -= v.x
+        this.y -= v.y
+        return this
     }
 
     public scale(s: number): Vector {
         return new Vector(this.x * s, this.y * s)
+    }
+
+    public distanceTo(v : Vector){
+        return Math.sqrt(Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2))
+    }
+
+    public angleTo(v : Vector){
+        return Math.atan2(v.y - this.y, v.x - this.x)
     }
 
     public getlength(): number {

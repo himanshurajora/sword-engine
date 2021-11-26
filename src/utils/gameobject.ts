@@ -23,13 +23,33 @@ export class GameObject {
 
 
 export class Particle extends GameObject {
-    constructor(position : Vector, width: number, color: string = "black",velocity : Vector = new Vector(0,0) , name: string = "Particle"){
-        super(position,0,color,velocity,name)
+    public mass : number
+    constructor(position : Vector, width: number, mass : number, color: string = "black",velocity : Vector = new Vector(0,0) , name: string = "Particle"){
+        super(position,width,color,velocity,name)
+        this.mass = mass
     }
 
     public draw(){
-        globalThis.context.fillStyle = this.color
-        globalThis.context.arc(this.position.x,this.position.y,this.width,0,2*Math.PI)
+
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
         
+        globalThis.context.fillStyle = this.color
+        globalThis.context.beginPath()
+        globalThis.context.arc(this.position.x,this.position.y,this.width,0,2*Math.PI)
+        globalThis.context.fill()
+
+    }
+
+    public gravitateTo(particle: Particle){
+        
+
+        var grav = new Vector(0,0)
+        var distance = this.position.distanceTo(particle.position)
+
+        grav.setLength(particle.mass / (distance * distance))
+        grav.setAngle(this.position.angleTo(particle.position))
+
+        this.velocity.add(grav)
     }
 }

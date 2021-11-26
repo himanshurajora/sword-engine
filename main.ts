@@ -4,6 +4,7 @@ declare const window: Window & typeof globalThis & { context: CanvasRenderingCon
 import { Shapes } from "./src/utils/shapes"
 import { calculateFPS, showFPS } from "./src/utils/devdata"
 import { Vector } from "./src/utils/vector"
+import { Particle } from "./src/utils/gameobject"
 var canvas = document.getElementById("canvas") as HTMLCanvasElement
 var context = globalThis.context = window.context = canvas.getContext("2d") as CanvasRenderingContext2D
 
@@ -61,15 +62,20 @@ var lasttime = performance.now()
 
 var Shape = new Shapes()
 
+var initialVelocity = new Vector(0, 0)
+initialVelocity.setLength(10)
+initialVelocity.setAngle(-Math.PI / 2)
+var particle = new Particle(new Vector(400, 400), 5, 1, "black", initialVelocity, "Particle");
+var sun = new Particle(new Vector(width/2, height/2), 20, 20000, "yellow", new Vector(0, 0), "Sun");
 function render() {
 
   Shape.clear()
-  Shape.setColor("black")
 
-  if (mouseDown) {
-    Shape.setColor("red")
-  }
-  Shape.drawPoint(new Vector(mousex, mousey), 2)
+  particle.gravitateTo(sun)
+  
+  particle.draw()
+  sun.draw()
+  
 
   var currenttime = performance.now()
   var fps = calculateFPS(lasttime, currenttime)
