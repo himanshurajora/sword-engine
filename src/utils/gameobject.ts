@@ -62,4 +62,9 @@ export class Particle extends GameObject {
         this.velocity.add(grav)
         
     }
+
+    public setMass(mass : number){
+        this.mass = mass
+    }
+    
 }

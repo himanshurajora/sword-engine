@@ -16,7 +16,7 @@ export class Shapes {
     public setLineCap(lineCap: CanvasLineCap) {
         this.context.lineCap = lineCap
     }
-    public setStrokeStyle(stroke: number, color: string) {
+    public setStrokeStyle(color: string, stroke: number = 1) {
         this.context.strokeStyle = color
         this.context.lineWidth = stroke
     }
