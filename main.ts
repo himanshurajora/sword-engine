@@ -5,9 +5,10 @@ import { Shapes } from "./src/utils/shapes"
 import { calculateFPS, showFPS } from "./src/utils/devdata"
 import { Vector } from "./src/utils/vector"
 import { Particle } from "./src/utils/gameobject"
+import utils from "./src/utils/utils"
+
 var canvas = document.getElementById("canvas") as HTMLCanvasElement
 var context = globalThis.context = window.context = canvas.getContext("2d") as CanvasRenderingContext2D
-
 canvas.style.cursor = "none"
 var height = canvas.height = window.innerHeight
 var width = canvas.width = window.innerWidth
@@ -66,39 +67,64 @@ var initialVelocity = new Vector(0, 0)
 // initialVelocity.setLength(10)
 // initialVelocity.setAngle(-Math.PI / 2)
 var particle = new Particle(new Vector(500, 400), 5, 1, "black", initialVelocity, "Particle");
-var sun = new Particle(new Vector(width/2, height/2), 5, 15000, "yellow", new Vector(0, 0), "Sun");
+var sun = new Particle(new Vector(width / 2, height / 2), 5, 15000, "yellow", new Vector(0, 0), "Sun");
 
 particle.hasDefaultGravity = true
 
-var particles : Particle[] = []
+var particles: Particle[] = []
+var mypos = new Particle(new Vector(mousex, mousey), 5, 1, "black", new Vector(0, 0), "Particle");
 
-for(var i = 0; i < 100; i++){
-    var p = new Particle(new Vector(Math.random() * width, Math.random() * height), Math.random() * 5, Math.random() * 10, "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")", new Vector(0, 0), "Particle");
-    p.hasDefaultGravity = true
-    particles.push(p)
-}
 
+
+
+
+var initialVelocity = new Vector(0, 0)
+initialVelocity.setLength(5)
+initialVelocity.setAngle(-Math.PI / 4)
+
+var sun = new Particle(new Vector(width / 2, height / 2), 5, 40000, "yellow", new Vector(0, 0), "Sun");
+var planet = new Particle(new Vector(400, 300), 3, 1000, "green", initialVelocity, "Planet");
+
+var points: Vector[] = [planet.position]
+// planet.hasDefaultGravity = true
 // the render function
 function render() {
-
-
+  
   Shape.clear()
   
   Shape.drawPoint(new Vector(mousex, mousey), 5)
   
-  Shape.drawCircle(particle.position, particle.width)
+  // mypos.draw()
+  // mypos = new Particle(new Vector(mousex, mousey), 5, 20000, "black", new Vector(0, 0), "Particle");
   
-  for(var i = 0; i < particles.length; i++){
-    particles[i].draw()
-    if(particles[i].position.y > height){
-        particles.splice(i, 1)
-        var p = new Particle(new Vector(Math.random() * width, 0), Math.random() * 5, Math.random() * 10, "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")", new Vector(0, 0), "Particle");
-        p.hasDefaultGravity = true
-        particles.push(p)
-        
-      }
+  
+  // Shape.drawCircle(particle.position, particle.width)
+  
+
+
+  
+  Shape.setColor("blue")
+  for (var i = 0; i < points.length; i++) {
+    Shape.drawPoint(points[i], 1)
   }
- 
+  // console.log(points)
+  points.push(new Vector(planet.position.x, planet.position.y))
+  
+  // if (points.length > 100) {
+  //   points.shift()
+  // }
+  // Shape.drawPolygon(points)
+  
+  // if(points.length > 20){
+  //   points.shift()
+  // }
+
+
+  sun.draw()
+  planet.draw()
+  
+  planet.gravitateTo(sun)
+  // sun.gravitateTo(planet)
   var currenttime = performance.now()
   var fps = calculateFPS(lasttime, currenttime)
   showFPS(parseInt(fps.toString()), "red")

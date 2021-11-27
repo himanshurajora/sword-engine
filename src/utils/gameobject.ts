@@ -1,7 +1,7 @@
 // game object class 
 
 import { Vector } from "./vector"
-
+declare var globalThis : {context : CanvasRenderingContext2D}
 export class GameObject {
 
     public position : Vector
@@ -60,5 +60,6 @@ export class Particle extends GameObject {
         grav.setAngle(this.position.angleTo(particle.position))
 
         this.velocity.add(grav)
+        
     }
 }
