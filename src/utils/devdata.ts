@@ -1,4 +1,5 @@
 // function to calculate fps
+declare const globalThis : {context : CanvasRenderingContext2D}
 export function calculateFPS(lasttime: number, currenttime: number) {
     let fps = 1000 / (currenttime - lasttime)
     return fps
