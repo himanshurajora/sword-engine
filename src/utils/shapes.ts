@@ -1,7 +1,7 @@
 import { Vector } from "./vector";
 // class for various shapes
 declare const window: Window & typeof globalThis & { context: CanvasRenderingContext2D }
-
+declare var globalThis : {context : CanvasRenderingContext2D}
 export class Shapes {
     private context: CanvasRenderingContext2D
     
@@ -91,4 +91,29 @@ export class Shapes {
         this.context.fillText(text, point.x, point.y)
     }
     
+}
+
+
+export class Rectangle{
+    public position: Vector
+    public width: number
+    public height: number
+    public color: string
+    public velocity: Vector
+    public name: string
+    constructor(position: Vector, width: number, height: number, color: string = "black", velocity: Vector = new Vector(0, 0), name: string = "Rectangle") {
+        this.position = position
+        this.width = width
+        this.height = height
+        this.color = color
+        this.velocity = velocity
+        this.name = name
+    }
+    public draw(){
+        globalThis.context.fillStyle = this.color
+        globalThis.context.beginPath()
+        globalThis.context.rect(this.position.x, this.position.y, this.width, this.height)
+        globalThis.context.fill()
+        globalThis.context.stroke()
+    }
 }

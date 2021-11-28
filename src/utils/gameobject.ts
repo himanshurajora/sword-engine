@@ -1,5 +1,6 @@
 // game object class 
 
+import { Rectangle } from "./shapes"
 import { Vector } from "./vector"
 declare var globalThis : {context : CanvasRenderingContext2D}
 export class GameObject {
@@ -65,6 +66,18 @@ export class Particle extends GameObject {
 
     public setMass(mass : number){
         this.mass = mass
+    }
+
+    public colidedWithRect(rect : Rectangle){
+    
+        if(this.position.x + this.width > rect.position.x &&
+            this.position.x < rect.position.x + rect.width &&
+            this.position.y + this.width > rect.position.y &&
+            this.position.y < rect.position.y + rect.height){
+                return true
+        }
+    
+        return false
     }
     
 }
