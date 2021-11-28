@@ -139,7 +139,7 @@ function render() {
     initialVelocity.setLength(length)
     initialVelocity.setAngle(angle)
 
-    var pl = new Particle(startPos, 10, 1000, "green", initialVelocity, "Planet");
+    var pl = new Particle(startPos, 10, 100, "green", initialVelocity, "Planet");
     extraPlanets.push({ planet: pl, points: [] })
 
     startPos = null
@@ -166,6 +166,13 @@ function render() {
     planet.planet.draw()
     planet.planet.gravitateTo(imaginarySun)
     // planet.planet.gravitateTo(earth)
+    
+    extraPlanets.forEach(otherPlanet => {
+      if (planet.planet != otherPlanet.planet) {
+        planet.planet.gravitateTo(otherPlanet.planet)
+      }
+    })
+
     // planet.planet.gravitateTo(moon)
     planet.points.forEach(point => {
       Shape.setStrokeStyle("red")
