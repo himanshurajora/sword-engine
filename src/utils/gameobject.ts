@@ -91,4 +91,27 @@ export class Particle extends GameObject {
         return false
     }
 
+    // colided with particle of width
+    public colidedWithParticle(particle: Particle) {
+
+        if (this.position.x + this.width > particle.position.x &&
+            this.position.x < particle.position.x + particle.width &&
+            this.position.y + this.width > particle.position.y &&
+            this.position.y < particle.position.y + particle.width) {
+            return true
+        }
+
+        return false
+    }
+
+    // colided with particle array of width
+    public colidedWithParticleArray(particleArray: Particle[]) {
+        for (var i = 0; i < particleArray.length; i++) {
+            if (this.colidedWithParticle(particleArray[i])) {
+                return particleArray[i]
+            }
+        }
+        return false
+    }
+
 }
