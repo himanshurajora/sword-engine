@@ -35,6 +35,10 @@ canvas.addEventListener("mousemove", function (e) {
 
 })
 
+// document.body.onkeydown = function (e) {
+//   switch (e.key) {
+//     case "Q":
+      
 
 canvas.addEventListener("mousedown", function (e) {
   mouseDown = true
@@ -80,11 +84,18 @@ var particle7 = new Particle(new Vector(1000, 200), 8, 1, "green")
 var particles2 = [particle4, particle5, particle6, particle7]
 var cubicbeziere = new CubicBezierCurve(particle4.position, particle5.position, particle6.position, particle7.position)
 
+
+
 var grabbedParticle = null
+
+// draw text at the top right corner
+
+Shape.setFont("bold 20px Arial")
 function render() {
-
+  
   Shape.clear()
-
+  // Shape.drawText("Press Q for new Quadratic Curve", new Vector(width - 400, 50))
+  // Shape.drawText("Press C for new Cubic Curve", new Vector(width - 400, 80))
   bezier.draw()
   cubicbeziere.draw()
   particles.forEach(particle => {
