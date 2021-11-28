@@ -110,6 +110,8 @@ export class Rectangle{
         this.name = name
     }
     public draw(){
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
         globalThis.context.fillStyle = this.color
         globalThis.context.beginPath()
         globalThis.context.rect(this.position.x, this.position.y, this.width, this.height)

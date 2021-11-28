@@ -27,6 +27,7 @@ export class GameObject {
 
 export class Particle extends GameObject {
     public mass : number
+    public gvalue : number = 0.1
     constructor(position : Vector, width: number, mass : number, color: string = "black",velocity : Vector = new Vector(0,0) , name: string = "Particle"){
         super(position,width,color,velocity,name)
         this.mass = mass
@@ -45,7 +46,7 @@ export class Particle extends GameObject {
         
         if(this.hasDefaultGravity){
             if(this.velocity.y < this.terminalVelocity){
-                this.velocity.y += 0.1
+                this.velocity.y += this.gvalue
             }
             
         }
@@ -77,6 +78,15 @@ export class Particle extends GameObject {
                 return true
         }
     
+        return false
+    }
+
+    public colidedWithRectArray(rectArray : Rectangle[]){
+        for(var i = 0; i < rectArray.length; i++){
+            if(this.colidedWithRect(rectArray[i])){
+                return [true, rectArray[i]]
+            }
+        }
         return false
     }
     
