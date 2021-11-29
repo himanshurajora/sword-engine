@@ -22,10 +22,7 @@ export class BezierCurve {
         
         Shape.drawLine(this.p0, this.p1);
         Shape.drawLine(this.p1, this.p2);
-        
-        var increament = this.p0.distanceTo(this.p2)/100000;
-
-        for(let t = 0; t <= 1; t += increament) {
+        for(let t = 0; t <= 1; t += 0.001) {
             Shape.drawPoint(this.getPoint(t), 1);
         }
     }
@@ -56,9 +53,8 @@ export class CubicBezierCurve {
         Shape.drawLine(this.p1, this.p2);
         Shape.drawLine(this.p2, this.p3);
         
-        var increament = this.p0.distanceTo(this.p3)/100000;
 
-        for(let t = 0; t <= 1; t += increament) {
+        for(let t = 0; t <= 1; t += 0.001) {
             Shape.drawPoint(this.getPoint(t), 1);
         }
     }

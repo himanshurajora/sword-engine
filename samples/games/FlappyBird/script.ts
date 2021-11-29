@@ -111,10 +111,11 @@ function render() {
   flappyBird.draw()
   
 
-  // if (flappyBird.position.y > height) {
-  //   // end the game and come out of the function
-  //   return
-  // }
+  if (flappyBird.position.y > height || flappyBird.position.y < 0) {
+    // end the game and come out of the function
+    
+    return
+  }
 
 
   var currenttime = performance.now()
