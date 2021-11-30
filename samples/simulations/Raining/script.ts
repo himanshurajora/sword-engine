@@ -93,7 +93,6 @@ var lasttime = performance.now()
 
 var Shape = new Shapes()
 
-var rect = new Rectangle(new Vector(300, 300), 100, 100)
 
 
 var raindrops: Particle[] = []
@@ -113,6 +112,11 @@ var currentVelocityX = 0
 for (var i = 0; i < 1000; i++) {
   newDrop()
 }
+
+var mouseAngle = Math.PI / 2
+var mousePos = new Vector(0, 0)
+// mousePos.setAngle(mouseAngle)
+// mousePos.setLength(currentVelocity)
 function render() {
 
   Shape.clear()
@@ -135,7 +139,7 @@ function render() {
     // if(keyPress) {
     //   drop.position.x += currentVelocityX
     // }
-    drop.drawLine()
+    drop.drawLine(mouseAngle)
   })
 
 
@@ -156,7 +160,16 @@ function render() {
   context.fillText(`current velocity on Y axis: ${currentVelocity + 1}`, width - 300, 60)
   context.fillText(`current velocity on X axis: ${currentVelocityX}`, width - 300, 40)
 
-  Shape.drawPoint(new Vector(mousex, mousey), 5)
+  mousePos = new Vector(mousex, mousey)
+  mouseAngle = mousePos.angleTo(new Vector(width / 2, height / 2))
+  Shape.drawPoint(mousePos, 5)
+ 
+
+  // print mouse angle 
+  context.font = "20px Arial"
+  context.fillStyle = "green"
+  context.fillText(`Mouse Angle: ${mouseAngle * 180 / Math.PI}`, 10, 50)
+
 
   var currenttime = performance.now()
   var fps = calculateFPS(lasttime, currenttime)

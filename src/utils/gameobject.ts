@@ -52,14 +52,24 @@ export class Particle extends GameObject {
         }
     }
 
-    public drawLine(){
+    public drawLine(angle :  number = NaN){
         globalThis.context.lineWidth = this.width;
         globalThis.context.strokeStyle = this.color;
         globalThis.context.beginPath()
         globalThis.context.moveTo(this.position.x, this.position.y)
         if(this.velocity.y > 6){
+            // var newPOs = new Vector(this.position.x + this.velocity.x, this.position.y + this.velocity.y)
+            // newPOs.rotateAround(angle, this.position)
+            // newPOs.setAngle(angle)
+            // newPOs.setLength(this.velocity.y)
+            // globalThis.context.lineTo(newPOs.x, newPOs.y)
+            // globalThis.context.lineTo(this.position.x + (this.velocity.x * Math.cos(angle)), this.position.y + (this.velocity.y * Math.sin(angle)))
             globalThis.context.lineTo(this.position.x + this.velocity.x, this.position.y + this.velocity.y * 3)
         }else{
+            // var newPos = new Vector(this.position.x + this.velocity.x, this.position.y + this.velocity.y)
+            // newPos.rotateAround(angle, this.position)
+            // globalThis.context.lineTo(newPos.x, newPos.y)
+            // globalThis.context.lineTo(this.position.x + (this.velocity.x * Math.cos(angle)), this.position.y + (this.velocity.y * Math.sin(angle)))
             globalThis.context.lineTo(this.position.x + this.velocity.x, this.position.y + this.velocity.y )
         }
         globalThis.context.stroke()
