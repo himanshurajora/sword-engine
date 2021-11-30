@@ -18,9 +18,11 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function add
      * @param {Vector} v 
      * @returns {Vector}
+     * @description add vector
+     * @memberof Vector
      */
     public add(v: Vector): Vector {
         this.x += v.x
@@ -29,9 +31,11 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function substract
      * @param {Vector} v 
      * @returns {Vector}
+     * @description substract vector
+     * @memberof Vector
      */
 
     public subtract(v: Vector): Vector {
@@ -41,67 +45,83 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function scale
      * @param {number} v 
      * @returns {Vector}
+     * @description scale vector
+     * @memberof Vector
      */
     public scale(s: number): Vector {
         return new Vector(this.x * s, this.y * s)
     }
 
     /**
-     * 
+     * @function distanceTo
      * @param {Vector} v 
      * @returns {number}
+     * @description distance to vector
+     * @memberof Vector   
      */
     public distanceTo(v: Vector) {
         return Math.sqrt(Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2))
     }
 
     /**
-     * 
+     * @function angleTo
      * @param {number} v 
      * @returns {Vector}
+     * @description angle to vector
+     * @memberof Vector
      */
     public angleTo(v: Vector) {
         return Math.atan2(v.y - this.y, v.x - this.x)
     }
 
     /**
-     * 
+     * @function getlength
      * @returns {number}
+     * @description get length
      */
     public getlength(): number {
         return this.length
     }
 
     /**
-     * 
+     * @function getAngle
      * @returns {number}
+     * @description get angle
+     * @memberof Vector
      */
     public getAngle(): number {
         return this.angle
     }
 
     /**
+     * @function normalize
      * @returns {number} 
+     * @description normalize vector
+     * @memberof Vector
      */
     public normalize(): Vector {
         return this.scale(1 / this.length)
     }
 
     /**
-     * 
+     * @funciton dot
      * @param {Vector} v 
      * @returns {number}
+     * @description dot product
+     * @memberof Vector
      */
     public dot(v: Vector): number {
         return this.x * v.x + this.y * v.y
     }
 
     /**
-     * 
-     * @param {number} l 
+     * @function setLength
+     * @param {number} 
+     * @description set length 
+     * @memberof Vector
      */
     public setLength(l: number) {
         this.length = l
@@ -110,8 +130,10 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function setAngle
      * @param {number} a 
+     * @description set angle
+     * @memberof Vector
      */
     public setAngle(a: number) {
         this.angle = a
@@ -120,8 +142,10 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function rotate
      * @param {number} angle 
+     * @description rotate vector
+     * @memberof Vector
      */
     public rotate(angle: number) {
         this.angle += angle
@@ -130,9 +154,11 @@ export class Vector implements Vector {
     }
 
     /**
-     * 
+     * @function rotateAround
      * @param {number} angle 
-     * @param  {Vector} center 
+     * @param  {Vector} center
+     * @description rotate around vector
+     * @memberof Vector 
      */
     public rotateAround(angle: number, center: Vector) {
         this.x = center.x + (this.x - center.x) * Math.cos(angle) - (this.y - center.y) * Math.sin(angle),
@@ -169,7 +195,7 @@ export class VectorAround extends Vector {
 
 
 /**
- * 
+ * @function addVectors
  * @param {Vector[]} vectors 
  * @returns {Vector}
  */
@@ -184,7 +210,7 @@ export function addVectors(...vectors: Vector[]): Vector {
 }
 
 /**
- * 
+ * @function subtractVectors
  * @param {Vector[]} vectors 
  * @returns {Vector}
  */
@@ -200,7 +226,7 @@ export function subtractVectors(...vectors: Vector[]): Vector {
 
 
 /**
- * 
+ * @function angleBetweenVectors
  * @param {Vector} vector1 
  * @param {Vector} vector2 
  * @param {"degree" | "radian"} type 
@@ -217,7 +243,7 @@ export function angleBetweenVectors(vector1: Vector, vector2: Vector, type: "rad
 
 
 /**
- * 
+ * @function distanceBetweenVectors
  * @param {Vector} vector1 
  * @param {Vector} vector2 
  * @returns {number}
@@ -227,7 +253,7 @@ export function distanceBetweenVectors(vector1: Vector, vector2: Vector): number
 }
 
 /**
- * 
+ * @function moveTowardVector
  * @param {Vector} vector1
  * @param  {Vector} vector2 
  * @param  {number} distance 
@@ -246,12 +272,12 @@ export function moveVectorByVelocity(vector: Vector, velocity: Vector): Vector {
 }
 
 /**
- * 
+ * @function getNewVelocityByAccelaration
  * @param {Vector} velocity
  * @param {Vector} accelation 
  * @returns {Vector}
  * @description returns a new velocity vector if the acceleration is applied to the velocity
  */
-export function getNewVelocityByAccelation(velocity: Vector, accelation: Vector): Vector {
+export function getNewVelocityByAccelaration(velocity: Vector, accelation: Vector): Vector {
     return velocity.add(accelation)
 }

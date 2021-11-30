@@ -22,9 +22,10 @@ export class BezierCurve {
         this.p2 = p2;
     }
     /**
-     * 
+     * @function getPoint
      * @param {number} t the time value between 0 and 1
      * @returns {Vector} the point at the time value
+     * @memberof BezierCurve
      */
     public getPoint(t: number): Vector {
         const x = (1 - t) * (1 - t) * this.p0.x + 2 * t * (1 - t) * this.p1.x + t * t * this.p2.x;
@@ -33,7 +34,9 @@ export class BezierCurve {
     }
 
     /**
-     * The function that draws the bezier curve on the canvas in every frame
+     * @function draw
+     * @description The function that draws the bezier curve on the canvas in every frame
+     * @memberof BezierCurve
      */
     public draw() {
         var Shape = new Shapes();
@@ -71,9 +74,10 @@ export class CubicBezierCurve {
     }
 
     /**
-     * 
+     * @function getPoint
      * @param {number} t the time value between 0 and 1
      * @returns {Vector} the point at the time value
+     * @memberof CubicBezierCurve
      */
     public getPoint(t: number): Vector {
         const x = (1 - t) * (1 - t) * (1 - t) * this.p0.x + 3 * t * (1 - t) * (1 - t) * this.p1.x + 3 * t * t * (1 - t) * this.p2.x + t * t * t * this.p3.x;
@@ -82,7 +86,9 @@ export class CubicBezierCurve {
     }
 
     /**
+     * @function draw
      * The function that draws the bezier curve on the canvas in every frame
+     * @memberof CubicBezierCurve
      */
     public draw() {
         var Shape = new Shapes();
@@ -101,7 +107,7 @@ export class CubicBezierCurve {
 // beziere curve for any number of points
 /**
  * @deprecated
- * @class BezierCurve
+ * @class BezierCurveForPoints
  * @description A bezier curve class
  * @param {Vector[]} points - an array of points
  * 
@@ -112,9 +118,10 @@ export class BezierCurveForPoints {
         this.points = points;
     }
     /**
-     * 
+     * @function getPoint
      * @param {number} t the time value between 0 and 1
-     * @returns 
+     * @returns {Vector}
+     * @memberof BezierCurveForPoints
      */
     public getPoint(t: number): Vector {
         let x = 0;
@@ -127,7 +134,9 @@ export class BezierCurveForPoints {
     }
 
     /**
+     * @function draw
      * The function that draws the bezier curve on the canvas in every frame
+     * @memberof BezierCurveForPoints
      */
     public draw() {
         var Shape = new Shapes();

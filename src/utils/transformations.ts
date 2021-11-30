@@ -1,7 +1,7 @@
 import { Vector } from "./vector"
 
 /**
- * 
+ * @function rotateVector
  * @param {Vector} vector 
  * @param {number} angle 
  * @returns {Vector}
@@ -14,7 +14,7 @@ export function rotateVector(vector: Vector, angle: number): Vector {
 }
 
 /**
- * 
+ * @function scaleVector
  * @param {Vector} vector 
  * @param {number} scale 
  * @returns {Vector}
@@ -25,7 +25,7 @@ export function scaleVector(vector: Vector, scale: number): Vector {
 }
 
 /**
- * 
+ * @function translateVector
  * @param {Vector} vector 
  * @param {Vector} translation 
  * @returns {Vector}

@@ -1,0 +1,8 @@
+{
+    "source"			:"./src",
+	"destination"		:"./docs",
+	"footer"			:"<h2>Made By The Vedik Dev - Himanshu Jangid</h2>",
+	"copyright"			:"No Copyright",
+	"outputSourceFiles" :true,
+	"commentsOnly" 		:false
+}

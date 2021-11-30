@@ -6,7 +6,7 @@ import { Particle } from "./gameobject";
 var utils = {
 
     /**
-     * 
+     * @function blastParticle
      * @param {Particle} particle the input particle
      * @description Blasts the particle 
      * Not yet implemented 
@@ -17,7 +17,7 @@ var utils = {
     },
 
     /**
-     * 
+     * @function getRandomColor
      * @returns {string} a random hex color
      */
     getRandomColor : () => {

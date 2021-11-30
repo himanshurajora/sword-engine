@@ -18,19 +18,21 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function setLineCap
      * @param  {CanvasLineCap} lineCap 
      * set the line cap
+     * @memberof Shapes
      */
     public setLineCap(lineCap: CanvasLineCap) {
         this.context.lineCap = lineCap
     }
 
     /**
-     * 
+     * @function setStrokeStyle
      * @param {string} color 
      * @param {number} stroke
-     * set the stroke color and width 
+     * set the stroke color and width
+     * @memberof Shapes 
      */
     public setStrokeStyle(color: string, stroke: number = 1) {
         this.context.strokeStyle = color
@@ -38,49 +40,54 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function setFillStyle
      * @param {string} color
      * set the stroke color for the context 
+     * @memberof Shapes
      */
     public setFillStyle(color: string) {
         this.context.fillStyle = color
     }
 
     /**
-     * 
+     * @function setFont
      * @param {string} font
-     * set the font for the context 
+     * set the font for the context
+     * @memberof Shapes 
      */
     public setFont(font: string) {
         this.context.font = font
     }
 
     /**
-     * 
+     * @function setColor
      * @param {string} color
      * set the fill color for the context 
+     * @memberof Shapes
      */
     public setColor(color: string) {
         this.context.fillStyle = color
     }
 
     /**
-     * 
+     * @function drawImage
      * @param {HTMLImageElement} image 
      * @param {Vector} point 
      * @param {number} width 
      * @param  {number} height 
      * draw an image on the canvas
+     * @memberof Shapes
      */
     public drawImage(image: HTMLImageElement, point: Vector, width: number, height: number) {
         this.context.drawImage(image, point.x, point.y, width, height)
     }
 
     /**
-     * 
+     * @function drawPoint
      * @param {Vector} point 
      * @param {number} width 
      * draw a point on the canvas
+     * @memberof Shapes
      */
     public drawPoint(point: Vector, width: number) {
         this.context.beginPath();
@@ -89,9 +96,10 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function drawPolygon
      * @param {Vector} points array of points
      * draw a polygon on the canvas 
+     * @memberof Shapes
      */
     public drawPolygon(points: Vector[]) {
         this.context.beginPath();
@@ -108,11 +116,13 @@ export class Shapes {
 
 
     /**
+     * @function drawRectangle
      * @beta
      * @param {Vector} point 
      * @param {number} width 
      * @param {number} height 
      * draw a rectangle on the canvas
+     * @memberof Shapes
      */
     public drawRectangle(point: Vector, width: number, height: number) {
         this.context.beginPath();
@@ -122,10 +132,11 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function drawCircle
      * @param {Vector} point 
      * @param {number} radius 
      * draw a circle on the canvas
+     * @memberof Shapes
      */
     public drawCircle(point: Vector, radius: number) {
         this.context.beginPath();
@@ -135,11 +146,12 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function drawEllipse
      * @param {Vector} point 
      * @param {number} width 
      * @param {number} height 
      * draw an ellipse on the canvas
+     * @memberof Shapes
      */
 
     public drawEllipse(point: Vector, width: number, height: number ) {
@@ -150,10 +162,11 @@ export class Shapes {
     }
 
     /**
-     * 
+     * @function drawLine
      * @param {Vector} point1 
      * @param {Vector} point2 
      * draw a line between two points on the canvas
+     * @memberof Shapes
      */
     public drawLine(point1: Vector, point2: Vector) {
         this.context.beginPath();
@@ -163,16 +176,20 @@ export class Shapes {
     }
 
     /**
+     * @function clear
      * clear the canvas
+     * @memberof Shapes
      */
     public clear() {
         this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     }
 
     /**
-     * 
+     * @function drawText
      * @param {string} text  the input text
      * @param {Vector} point the position of the text
+     * draw a text on the canvas
+     * @memberof Shapes
      */
     public drawText(text: string, point: Vector) {
         this.context.fillText(text, point.x, point.y)
@@ -181,6 +198,17 @@ export class Shapes {
 }
 
 
+
+
+    /**
+     * @class Rectangle
+     * @param {Vector} position 
+     * @param {number} width 
+     * @param {number} height 
+     * @param {string} color 
+     * @param {Vector} velocity 
+     * @param {string} name 
+     */
 export class Rectangle{
     public position: Vector
     public width: number
@@ -189,6 +217,8 @@ export class Rectangle{
     public velocity: Vector
     public name: string
     public center : Vector
+
+
     constructor(position: Vector, width: number, height: number, color: string = "black", velocity: Vector = new Vector(0, 0), name: string = "Rectangle") {
         this.position = position
         this.width = width
@@ -199,10 +229,16 @@ export class Rectangle{
         this.center = this.getCenter()
     }
 
+    /**
+     * @function rotate
+     * @param {number} angle 
+     * @memberof Rectangle
+     */
     public rotate(angle: number) {
         this.position.rotate(angle)
     }
     
+
     public rotateAroundPoint(angle: number, point: Vector) {
         this.position.rotateAround(angle, point)
     }
@@ -219,6 +255,11 @@ export class Rectangle{
         return new Vector(this.position.x + this.width/ 2, this.position.y + this.height/ 2)
     }
 
+
+    /**
+     * @function draw
+     * @memberof Rectangle
+     */
     public draw(){
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y

@@ -54,7 +54,9 @@ export class Particle extends GameObject {
     }
 
     /**
+     * @function draw
      * draw the particle on the canvas in every frame
+     * @memberof Particle
      */
     public draw() {
 
@@ -76,9 +78,10 @@ export class Particle extends GameObject {
     }
 
     /**
-     * 
+     * @function drawLine
      * @param {number} angle angle of the line
      * draw the partcle as a line with angle on the canvas in every frame
+     * @memberof Particle
      */
 
     public drawLine(angle :  number = NaN){
@@ -107,8 +110,9 @@ export class Particle extends GameObject {
     }
 
     /**
-     * 
+     * @function gravitateTo
      * @param {Particle} particle
+     * @memberof Particle
      */
 
     public gravitateTo(particle: Particle) {
@@ -124,8 +128,9 @@ export class Particle extends GameObject {
     }
 
     /**
-     * 
+     * @function setMass
      * @param {number} mass
+     * @memberof Particle
      * set the mass of the particle 
      */
     public setMass(mass: number) {
@@ -133,9 +138,10 @@ export class Particle extends GameObject {
     }
 
     /**
-     * 
+     * @function colidedWithRect
      * @param {Rectangle} rect 
      * @returns {boolean}
+     * @memberof Particle
      */
     public colidedWithRect(rect: Rectangle) {
 
@@ -150,9 +156,11 @@ export class Particle extends GameObject {
     }
 
     /**
+     * @function colidedWithRectArray
      * @beta
      * @param {Rectangle[]} rectArray 
      * @returns {[boolean, Rectangle]}
+     * @memberof Particle
      */
     public colidedWithRectArray(rectArray: Rectangle[]) {
         for (var i = 0; i < rectArray.length; i++) {
@@ -165,9 +173,10 @@ export class Particle extends GameObject {
 
     // colided with particle of width
     /**
-     * 
+     * @function colidedWithParticle
      * @param {Particle} particle 
      * @returns {boolean}
+     * @memberof Particle
      */
     public colidedWithParticle(particle: Particle) {
 
@@ -183,9 +192,10 @@ export class Particle extends GameObject {
 
     // colided with particle array of width
     /**
-     * 
+     * @function colidedWithParticleArray
      * @param {Particle[]}particleArray 
      * @returns {boolean | Particle} the result of the collision or the particle that colided or false
+     * @memberof Particle
      */
     public colidedWithParticleArray(particleArray: Particle[]) {
         for (var i = 0; i < particleArray.length; i++) {

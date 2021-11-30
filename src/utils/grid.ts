@@ -22,7 +22,9 @@ export class Grid {
     }
 
     /**
+     * @function draw
      * draw the grid on the canvas on the canvas in every frame
+     * @memberof Grid
      */
     public draw() {
         var x, y;
@@ -38,18 +40,20 @@ export class Grid {
 
    // draw point on grid using it width and height
    /**
-    * 
+    * @function drawPoint
     * @param {Vector} point
     * draw a point on the grid according to the grid's cordinates not the canvas cordinates 
+    * @memberof Grid
     */
     public drawPoint(point: Vector) {
         this.Shape.drawRectangle(new Vector(point.x * this.width, point.y * this.height), this.width, this.height)
     }
 
     /**
-     * 
+     * @function drawPoints
      * @param {Vector[]} points 
      * draw a list of points on the grid according to the grid's cordinates not the canvas cordinates
+     * @memberof Grid
      */
     public drawPoints(points: Vector[]) {
         points.forEach(point => {

@@ -2,7 +2,7 @@
 declare const globalThis : {context : CanvasRenderingContext2D}
 
 /**
- * 
+ * @function calculateFPS
  * @param {number} lasttime 
  * @param {number} currenttime 
  * @returns {number} the result of the calculation
@@ -16,7 +16,7 @@ export function calculateFPS(lasttime: number, currenttime: number) {
 
 // function to show fps
 /**
- * 
+ * @function showFPS
  * @param {number} fps 
  * @param {string} color
  * draws the fps on the screen 

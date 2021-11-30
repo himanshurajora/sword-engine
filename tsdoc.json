@@ -1,0 +1,37 @@
+{
+	"tags":
+	{
+		"allowUnknownTags" : true
+	},
+	"plugins":[
+		 "plugins/markdown"
+		,"/Users/Himanshu/Desktop/Files/Projects/sword-engine/node_modules/.pnpm/tsdoc@0.0.4/node_modules/tsdoc/template/plugins/TSDoc.js"
+	],
+	"opts":
+	{
+		"template"	:"/Users/Himanshu/Desktop/Files/Projects/sword-engine/node_modules/.pnpm/tsdoc@0.0.4/node_modules/tsdoc/template",
+		"recurse"	:"true"
+	},
+	"templates" : {
+		"cleverLinks"     : false,
+		"monospaceLinks"  : false
+	},
+	"source":
+	{
+		"includePattern": "(\\.d)?\\.ts$"
+	},
+	"markdown"  : {
+		"parser"   : "gfm",
+		"hardwrap" : true
+	},
+	"tsdoc":{
+		"source"		:"/Users/Himanshu/Desktop/Files/Projects/sword-engine/src/",
+		"destination"	:"/Users/Himanshu/Desktop/Files/Projects/sword-engine/docs",
+		"tutorials"		:"",
+		"systemName"	: "Sword Engine",
+		"footer"		: "<marquee>Made By Vedik Dev - Himanshu Jangid</marquee>",
+		"copyright"		: "sword-engine Copyright © 2021 Himanshu.",
+		"outputSourceFiles" : true,
+		"commentsOnly": true
+	}
+}
