@@ -101,6 +101,7 @@ export class Rectangle{
     public color: string
     public velocity: Vector
     public name: string
+    public center : Vector
     constructor(position: Vector, width: number, height: number, color: string = "black", velocity: Vector = new Vector(0, 0), name: string = "Rectangle") {
         this.position = position
         this.width = width
@@ -108,7 +109,29 @@ export class Rectangle{
         this.color = color
         this.velocity = velocity
         this.name = name
+        this.center = this.getCenter()
     }
+
+    public rotate(angle: number) {
+        this.position.rotate(angle)
+    }
+    
+    public rotateAroundPoint(angle: number, point: Vector) {
+        this.position.rotateAround(angle, point)
+    }
+
+    public rotateAroundItsCenter(angle: number) {
+        var shape = new Shapes()
+        shape.setColor("red")
+        shape.drawPoint(this.center, 5)
+        shape.drawPoint(this.position, 5)
+        this.position.rotateAround(angle, this.center)
+    }
+
+    public getCenter(): Vector {
+        return new Vector(this.position.x + this.width/ 2, this.position.y + this.height/ 2)
+    }
+
     public draw(){
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y

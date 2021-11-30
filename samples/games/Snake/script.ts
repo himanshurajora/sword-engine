@@ -168,9 +168,11 @@ function render() {
 
 
     snakeHead.add(snakeVelocity)
-    for (var i = points.length - 1; i > 0; i--) {
-      points[i].x = points[i - 1].x
-      points[i].y = points[i - 1].y
+    if(eaten > 0){
+      for (var i = points.length - 1; i > 0; i--) {
+        points[i].x = points[i - 1].x
+        points[i].y = points[i - 1].y
+      }
     }
     startTime = currentTime
   }

@@ -63,6 +63,17 @@ export class Vector implements Vector {
         this.y = Math.sin(a) * this.length
     }
 
+    public rotate(angle: number) {
+        this.angle += angle
+        this.x = Math.cos(this.angle) * this.length
+        this.y = Math.sin(this.angle) * this.length
+    }
+
+    public rotateAround(angle: number, center: Vector) {
+        this.x = center.x + (this.x - center.x) * Math.cos(angle) - (this.y - center.y) * Math.sin(angle),
+        this.y = center.y + (this.x - center.x) * Math.sin(angle) + (this.y - center.y) * Math.cos(angle)
+    }
+    
 }
 
 // vector for another vector as origin
