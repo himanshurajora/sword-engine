@@ -3,6 +3,16 @@
 import { Rectangle } from "./shapes"
 import { Vector } from "./vector"
 declare var globalThis: { context: CanvasRenderingContext2D }
+
+/**
+ * @absract GameObject class
+ * @class GameObject
+ * @param {Vector} position - position of the object
+ * @param {number} width - width of the object
+ * @param {string} color - color of the object
+ * @param {Vector} velocity - velocity of the object
+ * @param {string} name - name of the object
+ */
 export class GameObject {
 
     public position: Vector
@@ -24,7 +34,17 @@ export class GameObject {
 }
 
 
-
+/**
+ * @class Particle
+ * @extends GameObject
+ * @param {Vector} position - position of the object
+ * @param {number} width - width of the object
+ * @param {number} mass - mass of the object
+ * @param {string} color - color of the object
+ * @param {Vector} velocity - velocity of the object
+ * @param {string} name - name of the object
+ * 
+ */
 export class Particle extends GameObject {
     public mass: number
     public gvalue: number = 0.1
@@ -33,6 +53,9 @@ export class Particle extends GameObject {
         this.mass = mass
     }
 
+    /**
+     * draw the particle on the canvas in every frame
+     */
     public draw() {
 
 
@@ -51,6 +74,12 @@ export class Particle extends GameObject {
 
         }
     }
+
+    /**
+     * 
+     * @param {number} angle angle of the line
+     * draw the partcle as a line with angle on the canvas in every frame
+     */
 
     public drawLine(angle :  number = NaN){
         globalThis.context.lineWidth = this.width;
@@ -77,9 +106,12 @@ export class Particle extends GameObject {
         this.position.y += this.velocity.y
     }
 
+    /**
+     * 
+     * @param {Particle} particle
+     */
+
     public gravitateTo(particle: Particle) {
-
-
         var grav = new Vector(0, 0)
         var distance = this.position.distanceTo(particle.position)
 
@@ -91,10 +123,20 @@ export class Particle extends GameObject {
 
     }
 
+    /**
+     * 
+     * @param {number} mass
+     * set the mass of the particle 
+     */
     public setMass(mass: number) {
         this.mass = mass
     }
 
+    /**
+     * 
+     * @param {Rectangle} rect 
+     * @returns {boolean}
+     */
     public colidedWithRect(rect: Rectangle) {
 
         if (this.position.x + this.width > rect.position.x &&
@@ -107,6 +149,11 @@ export class Particle extends GameObject {
         return false
     }
 
+    /**
+     * @beta
+     * @param {Rectangle[]} rectArray 
+     * @returns {[boolean, Rectangle]}
+     */
     public colidedWithRectArray(rectArray: Rectangle[]) {
         for (var i = 0; i < rectArray.length; i++) {
             if (this.colidedWithRect(rectArray[i])) {
@@ -117,6 +164,11 @@ export class Particle extends GameObject {
     }
 
     // colided with particle of width
+    /**
+     * 
+     * @param {Particle} particle 
+     * @returns {boolean}
+     */
     public colidedWithParticle(particle: Particle) {
 
         if (this.position.x + this.width > particle.position.x &&
@@ -130,6 +182,11 @@ export class Particle extends GameObject {
     }
 
     // colided with particle array of width
+    /**
+     * 
+     * @param {Particle[]}particleArray 
+     * @returns {boolean | Particle} the result of the collision or the particle that colided or false
+     */
     public colidedWithParticleArray(particleArray: Particle[]) {
         for (var i = 0; i < particleArray.length; i++) {
             if (this.colidedWithParticle(particleArray[i])) {

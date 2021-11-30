@@ -1,10 +1,25 @@
 import { Particle } from "./gameobject";
 
+/**
+ * The utils class contains a number of utility functions.
+ */
 var utils = {
+
+    /**
+     * 
+     * @param {Particle} particle the input particle
+     * @description Blasts the particle 
+     * Not yet implemented 
+     */
     blastParticle : (particle : Particle)=>{
         particle.velocity.setLength(Math.random() * 10)
         particle.velocity.setAngle(Math.random() * 2 * Math.PI)
     },
+
+    /**
+     * 
+     * @returns {string} a random hex color
+     */
     getRandomColor : () => {
         var letters = '0123456789ABCDEF';
         var color = '#';

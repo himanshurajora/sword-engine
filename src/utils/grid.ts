@@ -3,6 +3,14 @@
 import { Shapes } from "./shapes";
 import { Vector } from "./vector";
 
+/**
+ * Grid class
+ * @class Grid
+ * @classdesc Grid class
+ * @param {number} width - width of the grid
+ * @param {number} height - height of the grid
+ * the class to create a virtual grid on the canvas with the given width and height for each cell
+ */
 export class Grid {
     public width: number
     public height: number
@@ -13,6 +21,9 @@ export class Grid {
         this.Shape = new Shapes()
     }
 
+    /**
+     * draw the grid on the canvas on the canvas in every frame
+     */
     public draw() {
         var x, y;
 
@@ -26,10 +37,20 @@ export class Grid {
     }
 
    // draw point on grid using it width and height
+   /**
+    * 
+    * @param {Vector} point
+    * draw a point on the grid according to the grid's cordinates not the canvas cordinates 
+    */
     public drawPoint(point: Vector) {
         this.Shape.drawRectangle(new Vector(point.x * this.width, point.y * this.height), this.width, this.height)
     }
 
+    /**
+     * 
+     * @param {Vector[]} points 
+     * draw a list of points on the grid according to the grid's cordinates not the canvas cordinates
+     */
     public drawPoints(points: Vector[]) {
         points.forEach(point => {
             this.Shape.drawRectangle(new Vector(point.x * this.width, point.y * this.height), this.width, this.height)

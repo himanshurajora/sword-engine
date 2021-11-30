@@ -2,6 +2,10 @@
 import { Vector } from "./vector";
 
 
+/**
+ * @deprecated
+ * @class MouseEvents
+ */
 export class MouseEvents {
     canvas: HTMLCanvasElement
     mousePosition(e: MouseEvent): Vector {
