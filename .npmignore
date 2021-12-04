@@ -1,0 +1,7 @@
+./docs
+./samples
+./tests
+.vscode
+.git
+.gitignore
+.tsdoc.json
