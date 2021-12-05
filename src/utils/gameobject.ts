@@ -84,7 +84,7 @@ export class Particle extends GameObject {
      * @memberof Particle
      */
 
-    public drawLine(angle :  number = NaN){
+    public drawLine(){
         globalThis.context.lineWidth = this.width;
         globalThis.context.strokeStyle = this.color;
         globalThis.context.beginPath()
