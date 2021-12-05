@@ -38,66 +38,108 @@ canvas.addEventListener("mousemove", function (e) {
 
 })
 
+document.body.addEventListener("keydown", (e) =>{
+  switch(e.key){
+    case "ArrowLeft":
+      click--;
+      break;
+    case "ArrowRight":
+      click++;
+      break;
+    default:
+      break;
+  }
+
+})
+
 var Shape = new Shapes()
 var lasttime = performance.now()
 
 
-var program = `
-const a = 10;
-const b = 20;
-`
-
-var result = esprima.parseScript(program, {loc : true})
-console.log(result)
+var list = [{ weight: 3, value: 2 }, { weight: 4, value: 3 }, { weight: 5, value: 4 }, { weight: 6, value: 1 }];
+// var list = [{weight : 1, value: 2}, {weight: 2, value: 3}]
+var weights = list.map(x => x.weight)
+var values = list.map(x => x.value)
+// weights.unshift(0)
+// values.unshift(0)
+var W = 19
+var click = 0
+var s = performance.now()
+var K = knapsack(list, W, click);
+var answer = 0
+var arr = new Array2D(K, 200, 100, 50, 50)
+var warr = new Array1D(weights, 50, arr.y+arr.height * 1.5 + arr.padding * 15, 30, 50, "Vertical", "wt")
+var varr = new Array1D(values, 100, arr.y+arr.height * 1.5 + arr.padding * 15, 30, 50, "Vertical", "p")
+var message = "Knapsack Problem"
 function render() {
+  
+  
+  var e = performance.now()
+  if(e-s >= 200){
+    Shape.clear()
+    shapeutils.drawText(message, new Vector(arr.x, arr.y + arr.height - 50))
+    arr.array = knapsack(list, W, click)
+    arr.draw()
+    warr.draw()
+    varr.draw()
+    // Draw The Solution
+    answer = arr.array[list.length][W]
+    shapeutils.drawText(`The Solution Should Be: ${answer}`, new Vector(arr.x, height - 100))
+    s = e
+  }
+  
 
-  Shape.clear()
-
-
-
-  arr.draw()
-
-
-  var currenttime = performance.now()
-  var fps = calculateFPS(lasttime, currenttime)
-  showFPS(parseInt(fps.toString()), "red")
-  lasttime = currenttime
+  // var currenttime = performance.now()
+  // var fps = calculateFPS(lasttime, currenttime)
+  // showFPS(parseInt(fps.toString()), "red")
+  // lasttime = currenttime
   shapeutils.drawPoint(new Vector(mousex, mousey), 3)
+  requestAnimationFrame(render)
 }
 
+function drawComparisonText(a, b){
+    var text = "Max of " + a + " and " + b + " is " + Math.max(a,b)
+    shapeutils.setFillStyle("black")
+    shapeutils.drawText(text, new Vector(30, 30))
+}
 
-var arr = new Array2D([[]], 100, 100, 50, 50)
-// knapsack algorithm with dynamic programming
+render()
 
-
-function knapsack(items: Array<{ weight: number, value: number }>, capacity: number, step : number) {
+function knapsack(items: Array<{ weight: number, value: number }>, capacity: number, step: number) {
+  var currentstep = 0
   var n = items.length
   var w = capacity
-  var K = utils.get2dArray(n + 1, w + 1)
-
-  arr.array = K
-
+  var K = utils.get2dArray(n + 1, w + 1) as any
   for (var i = 0; i <= n; i++) {
     for (var j = 0; j <= w; j++) {
-      if (i == 0 || j == 0) {
-        K[i][j] = 0 
-        arr.changeValue(i, j, 0)
-      } else if (items[i - 1].weight <= j) {
-        K[i][j] = Math.max(items[i - 1].value + K[i - 1][j - items[i - 1].weight], K[i - 1][j])
-        arr.changeValue(i, j, K[i][j])
-      } else {
-        K[i][j] = K[i - 1][j]
-        arr.changeValue(i, j, K[i][j])
+      currentstep++
+      if (currentstep <= step) {
+        if (i == 0 || j == 0) {
+          K[i][j] = 0
+          message = "Base Case : No Items or No Capacity"
+        } else if (items[i - 1].weight <= j) {
+          K[i][j] = Math.max(items[i - 1].value + K[i - 1][j - items[i - 1].weight], K[i - 1][j])
+          var a = items[i - 1].value + K[i - 1][j - items[i - 1].weight]
+          var b = K[i - 1][j]
+          message = `the capacity ${j} can be fill with item ${i} which has weight ${items[i - 1].weight} and value ${items[i - 1].value}. The max value of ${a} and ${b} is ${Math.max(a,b)} so it is filled
+          `
+        } else {
+          K[i][j] = K[i - 1][j]
+          message = `the capacity ${j} is less item ${i}'s weight that is: ${items[i - 1].weight}`
+        }
+      }else{
+        break;
       }
     }
   }
 
-
-  console.log(K[n][w])
   return K;
 }
 
-// var K = knapsack([{ weight: 1, value: 10 }, { weight: 2, value: 20 }, { weight: 3, value: 30 }, { weight: 4, value: 40 }], 5)
+
+
+
+// var K = knapsack([{ weight: 3, value: 2 }, { weight: 4, value: 3 }, { weight: 5, value: 4 }, { weight: 6, value: 1 }], 8)
 
 
 

@@ -100,30 +100,56 @@ export class Array1D {
     public padding: number
     public fillColor: string = utils.getRadomDarkColor()
     public fontColor: string = utils.getRandomLightColor()
-
-    constructor(array: number[], x: number, y: number, width: number = 50, height: number = 50, padding: number = 4) {
+    public orientation : string
+    public heading : string
+    constructor(array: number[], x: number, y: number, width: number = 50, height: number = 50, orientation : "Horizontal" | "Vertical", heading : string, padding: number = 4) {
         this.array = array
         this.width = width
         this.height = height
         this.x = x
         this.y = y
-
-        console.log(this.fillColor, this.fontColor)
-
+        this.orientation = orientation
+        this.heading = heading
         this.padding = padding
     }
 
     public draw() {
         var cells: ArrayCell[] = []
-        for (var i = 0; i < this.array.length; i++) {
-            if (this.array[i - 1]) {
-                var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
-                cell.draw()
-                cells.push(cell)
-            } else {
-                var cell = new ArrayCell(this.x, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
-                cell.draw()
-                cells.push(cell)
+        // draw heading text 
+        shapeutils.setFillStyle("black")
+        shapeutils.setFont("20px Arial")
+        shapeutils.drawText(this.heading, new Vector(this.x + this.width / 2, this.y - this.padding))
+
+        if(this.orientation === "Horizontal"){
+
+        
+
+            for (var i = 0; i < this.array.length; i++) {
+                if (this.array[i - 1]) {
+                    var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
+                    cell.draw()
+                    cells.push(cell)
+                } else {
+                    var cell = new ArrayCell(this.x, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
+                    cell.draw()
+                    cells.push(cell)
+                }
+            }
+        }else{
+
+
+
+
+            for (var i = 0; i < this.array.length; i++) {
+                if (this.array[i - 1]) {
+                    var cell = new ArrayCell(this.x, cells[i - 1].y + cells[i - 1].height + this.padding, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
+                    cell.draw()
+                    cells.push(cell)
+                } else {
+                    var cell = new ArrayCell(this.x, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
+                    cell.draw()
+                    cells.push(cell)
+                }
             }
         }
     }
@@ -168,7 +194,7 @@ export class Array2D {
     public padding: number
     public fillColor: string = utils.getRadomDarkColor()
     public fontColor: string = utils.getRandomLightColor()
-    public maxValue : number = 0
+    public maxValue: number = 0
     constructor(array: number[][], x: number, y: number, width: number = 50, height: number = 50, padding: number = 4) {
         this.array = array
         this.width = width
@@ -181,23 +207,40 @@ export class Array2D {
 
     public draw() {
         this.array.forEach((row, i) => {
+            // put indeeces on the row
             this.drawRow(row, i, this.maxValue)
         })
     }
 
-    public drawRow(row: number[], index: number, maxValue : number) {
+    public drawRow(row: number[], index: number, maxValue: number) {
         var cells: ArrayCell[] = []
         for (var i = 0; i < row.length; i++) {
-            console.log(row[i-1])
             if (row[i - 1] || row[i - 1] === 0) {
                 var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y + (index + 1) * this.padding * 15, this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor, maxValue)
                 cell.draw()
                 cells.push(cell)
+
             } else {
                 var cell = new ArrayCell(this.x, this.y + (index + 1) * this.padding * 15, this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor, maxValue)
                 cell.draw()
                 cells.push(cell)
+                // put indedces on the column
             }
+
+            if(index === 0){
+                shapeutils.setFillStyle("black")
+                shapeutils.setFont("20px Arial")
+                shapeutils.drawText(i.toString(), new Vector(this.x + i * (this.width + shapeutils.measureText(row[i].toString()).width, this.y)/1.4 + 10, this.y + this.height +this.padding))
+            }
+
+            if (i == 0) {
+                // put indeces on top of cells
+                shapeutils.setFillStyle("black")
+                shapeutils.setFont("20px Arial")
+                shapeutils.drawText(index.toString(), new Vector(this.x - this.padding  * 10 , this.y + (index + 1) * this.padding * 15 + this.height / 2))
+            }
+
+
         }
     }
 

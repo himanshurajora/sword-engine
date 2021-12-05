@@ -48,7 +48,7 @@ var utils = {
     },
 
     get2dArray : (rows : number, columns : number) => {
-        return Array.from({length : rows}, ()=>Array.from({length : columns}, ()=>-1))
+        return Array.from({length : rows}, ()=>Array.from({length : columns}, ()=> "  "))
     }
 }
 
