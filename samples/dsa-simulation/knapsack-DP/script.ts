@@ -153,7 +153,6 @@ function knapsack(items: Array<{ weight: number, value: number }>, capacity: num
       }
     }
   }
-
   return K;
 }
 
@@ -170,5 +169,5 @@ function future() {
       Capacity -= list[i - 1].weight
     }
   }
-
+  message = "0|1 Knapsack Problem"
 }
