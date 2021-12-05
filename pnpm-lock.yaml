@@ -1,12 +1,18 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/esprima': ^4.0.3
+  esprima: ^4.0.1
   jsdoc: ^3.6.7
   jsdocs: ^1.0.0
   tsdoc: ^0.0.4
   tsdocs: ^1.0.2
   typescript: ^4.3.2
   vite: ^2.6.4
+
+dependencies:
+  '@types/esprima': 4.0.3
+  esprima: 4.0.1
 
 devDependencies:
   jsdoc: 3.6.7
@@ -23,6 +29,16 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dev: true
+
+  /@types/esprima/4.0.3:
+    resolution: {integrity: sha512-jo14dIWVVtF0iMsKkYek6++4cWJjwpvog+rchLulwgFJGTXqIeTdCOvY0B3yMLTaIwMcKCdJ6mQbSR6wYHy98A==}
+    dependencies:
+      '@types/estree': 0.0.50
+    dev: false
+
+  /@types/estree/0.0.50:
+    resolution: {integrity: sha512-C6N5s2ZFtuZRj54k2/zyRhNDjJwwcViAM3Nbm8zjBpbqAdZ00mr0CFxvSKeO8Y/e03WVFLpQMdHYVfUd6SB+Hw==}
+    dev: false
 
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -336,6 +352,12 @@ packages:
     resolution: {integrity: sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==}
     engines: {node: '>=8'}
     dev: true
+
+  /esprima/4.0.1:
+    resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
+    engines: {node: '>=4'}
+    hasBin: true
+    dev: false
 
   /etag/1.8.1:
     resolution: {integrity: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=}

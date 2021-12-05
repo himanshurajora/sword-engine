@@ -45,8 +45,11 @@ var utils = {
             color += letters[Math.floor(Math.random() * 4)];
         }
         return color;
-    }
+    },
 
+    get2dArray : (rows : number, columns : number) => {
+        return Array.from({length : rows}, ()=>Array.from({length : columns}, ()=>-1))
+    }
 }
 
 

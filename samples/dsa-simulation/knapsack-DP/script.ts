@@ -10,7 +10,8 @@ import { Grid } from '../../../src/utils/grid'
 var canvas = document.getElementById("canvas") as HTMLCanvasElement
 var context = globalThis.context = window.context = canvas.getContext("2d") as CanvasRenderingContext2D
 import shapeutils from "../../../src/utils/shapeutils"
-import {Array1D, Array2D} from '../../../src/dsutils/array'
+import { Array1D, Array2D } from '../../../src/dsutils/array'
+import * as esprima from 'esprima'
 
 canvas.style.cursor = "none"
 var height = canvas.height = window.innerHeight
@@ -39,40 +40,65 @@ canvas.addEventListener("mousemove", function (e) {
 
 var Shape = new Shapes()
 var lasttime = performance.now()
-var array = [10, 20, 30, 40, 50, 60]
-var arr = [
-  [1,2,3,4],
-  [5,6,7,8],
-  [9,10,11,12],
-  [13,14,15,16]
-]
-var arry2d = new Array2D(arr, 700, 100, 50, 50)
 
-var arrvis = new Array1D(array, 100, 100, 50, 50)
 
-var s = performance.now()
+var program = `
+const a = 10;
+const b = 20;
+`
+
+var result = esprima.parseScript(program, {loc : true})
+console.log(result)
 function render() {
 
   Shape.clear()
 
-  // arrvis.draw()
-  arry2d.draw()
-  var e = performance.now()
-  if(e- s > 1000){
-    var val =  Math.random()*1000;
-    arrvis.changeValue(1, val);
-    console.log(val)
-    s = e;
-  }
 
 
+  arr.draw()
 
 
   var currenttime = performance.now()
   var fps = calculateFPS(lasttime, currenttime)
   showFPS(parseInt(fps.toString()), "red")
   lasttime = currenttime
-  requestAnimationFrame(render)
+  shapeutils.drawPoint(new Vector(mousex, mousey), 3)
 }
 
-render()
+
+var arr = new Array2D([[]], 100, 100, 50, 50)
+// knapsack algorithm with dynamic programming
+
+
+function knapsack(items: Array<{ weight: number, value: number }>, capacity: number, step : number) {
+  var n = items.length
+  var w = capacity
+  var K = utils.get2dArray(n + 1, w + 1)
+
+  arr.array = K
+
+  for (var i = 0; i <= n; i++) {
+    for (var j = 0; j <= w; j++) {
+      if (i == 0 || j == 0) {
+        K[i][j] = 0 
+        arr.changeValue(i, j, 0)
+      } else if (items[i - 1].weight <= j) {
+        K[i][j] = Math.max(items[i - 1].value + K[i - 1][j - items[i - 1].weight], K[i - 1][j])
+        arr.changeValue(i, j, K[i][j])
+      } else {
+        K[i][j] = K[i - 1][j]
+        arr.changeValue(i, j, K[i][j])
+      }
+    }
+  }
+
+
+  console.log(K[n][w])
+  return K;
+}
+
+// var K = knapsack([{ weight: 1, value: 10 }, { weight: 2, value: 20 }, { weight: 3, value: 30 }, { weight: 4, value: 40 }], 5)
+
+
+
+

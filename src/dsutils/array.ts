@@ -31,14 +31,14 @@ class ArrayCell {
     public color: string
     public textColor: string
     public textWidth: number
-    constructor(x: number, y: number, width: number, height: number, value: number, padding: number, color: string, textColor: string) {
+    constructor(x: number, y: number, width: number, height: number, value: number, padding: number, color: string, textColor: string, textWidth: number) {
         this.x = x
         this.y = y
         this.height = height
         this.value = value
         this.padding = padding
         this.color = color
-        this.textWidth = shapeutils.measureText(value.toString()).width
+        this.textWidth = shapeutils.measureText(value.toString()).width > textWidth ? shapeutils.measureText(value.toString()).width : textWidth
         this.width = width + this.textWidth + this.padding
         this.textColor = textColor
     }
@@ -101,7 +101,7 @@ export class Array1D {
     public fillColor: string = utils.getRadomDarkColor()
     public fontColor: string = utils.getRandomLightColor()
 
-    constructor(array: number[], x: number, y: number, width: number, height: number, padding: number = 4) {
+    constructor(array: number[], x: number, y: number, width: number = 50, height: number = 50, padding: number = 4) {
         this.array = array
         this.width = width
         this.height = height
@@ -117,11 +117,11 @@ export class Array1D {
         var cells: ArrayCell[] = []
         for (var i = 0; i < this.array.length; i++) {
             if (this.array[i - 1]) {
-                var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor)
+                var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
                 cell.draw()
                 cells.push(cell)
             } else {
-                var cell = new ArrayCell(this.x, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor)
+                var cell = new ArrayCell(this.x, this.y, this.width, this.height, this.array[i], this.padding, this.fillColor, this.fontColor, 0)
                 cell.draw()
                 cells.push(cell)
             }
@@ -168,31 +168,33 @@ export class Array2D {
     public padding: number
     public fillColor: string = utils.getRadomDarkColor()
     public fontColor: string = utils.getRandomLightColor()
-
-    constructor(array: number[][], x: number, y: number, width: number, height: number, padding: number = 4) {
+    public maxValue : number = 0
+    constructor(array: number[][], x: number, y: number, width: number = 50, height: number = 50, padding: number = 4) {
         this.array = array
         this.width = width
         this.height = height
         this.x = x
         this.y = y
         this.padding = padding
+        this.maxValue = Math.max(...this.array.flat())
     }
 
     public draw() {
         this.array.forEach((row, i) => {
-            this.drawRow(row, i)
+            this.drawRow(row, i, this.maxValue)
         })
     }
 
-    public drawRow(row: number[], index : number) {
+    public drawRow(row: number[], index: number, maxValue : number) {
         var cells: ArrayCell[] = []
         for (var i = 0; i < row.length; i++) {
-            if (row[i - 1]) {
-                var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y  * (index+1) , this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor)
+            console.log(row[i-1])
+            if (row[i - 1] || row[i - 1] === 0) {
+                var cell = new ArrayCell(cells[i - 1].x + cells[i - 1].width + this.padding, this.y + (index + 1) * this.padding * 15, this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor, maxValue)
                 cell.draw()
                 cells.push(cell)
             } else {
-                var cell = new ArrayCell(this.x, this.y * (index + 1), this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor)
+                var cell = new ArrayCell(this.x, this.y + (index + 1) * this.padding * 15, this.width, this.height, row[i], this.padding, this.fillColor, this.fontColor, maxValue)
                 cell.draw()
                 cells.push(cell)
             }
@@ -202,5 +204,11 @@ export class Array2D {
 
     public changeValue(row: number, col: number, value: number) {
         this.array[row][col] = value
+        this.getMaxValue()
+    }
+
+    public getMaxValue(): number {
+        this.maxValue = Math.max(...this.array.flat())
+        return this.maxValue
     }
 }
