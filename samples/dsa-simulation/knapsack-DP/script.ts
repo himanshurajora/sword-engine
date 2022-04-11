@@ -104,12 +104,20 @@ function render() {
     warr.draw()
     varr.draw()
     // Draw The Solution
-    shapeutils.drawText(`The Solution Should Be: ${answer}`, new Vector(arr.x, height - 200))
+    shapeutils.drawText(`The Solution Should Be: ${answer}`, new Vector(arr.x, arr.height))
     shapeutils.drawText(`Selected Items: ${selectedItems.map((data) => `wt - ${data.weight} || p - ${data.value}`)}`, new Vector(arr.x, height - 150))
-    s = e
+    
+    
+        // Instrucitons
+        shapeutils.setColor("Green")
+        shapeutils.drawText("Instructions:", new Vector(width / 2, height - 100))
+        shapeutils.setColor("blue")
+        shapeutils.drawText("Use the Up ⬆️ and Down ⬇️ arrow key to change the capacity of bag", Vector.createInstance(width / 2, height - 70))
+        shapeutils.drawText("Use the Left ⬅️ and Right ➡️ to move to the next step", Vector.createInstance(width / 2, height - 40))
+        s = e
   }
-
-
+  
+  
   // var currenttime = performance.now()
   // var fps = calculateFPS(lasttime, currenttime)
   // showFPS(parseInt(fps.toString()), "red")

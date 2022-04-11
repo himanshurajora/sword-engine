@@ -11,32 +11,50 @@
       padding: 0;
       margin: 0;
     }
+
+    #app{
+      position: relative;
+    }
+    .lists{
+      position: absolute;
+      right: 0;
+    }
+    
   </style>
 </head>
 
 <body>
-
-  <ul>
-    <li>
-      <h1>Simulations</h1>
-      <ol>
-        <li><a href="/samples/simulations/SolorSystem/">Solor System</a></li>
-        <li><a href="/samples/simulations/BeziereCurves/">Beziere Curves</a></li>
-        <li><a href="/samples/simulations/Raining/">Raining</a></li>
-
-      </ol>
-    </li>
-    <li>
-      <h1>Games</h1>
-      <ol>
-        <li><a href="/samples/games/FlappyBird/">Flappy Bird</a></li>
-        <li><a href="/samples/games/Snake/">Snake</a></li>
-        <li><a href="/samples/games/SpaceWar/">Space War</a></li>
-      </ol>
-    </li>
-  </ul>
-
+  
   <div id="app">
+    <div class="lists">
+      <ul>
+        <li>
+          <h1>Simulations</h1>
+          <ol>
+            <li><a href="/samples/simulations/SolorSystem/">Solor System</a></li>
+            <li><a href="/samples/simulations/BeziereCurves/">Beziere Curves</a></li>
+            <li><a href="/samples/simulations/Raining/">Raining</a></li>
+    
+          </ol>
+        </li>
+        <li>
+          <h1>Games</h1>
+          <ol>
+            <li><a href="/samples/games/FlappyBird/">Flappy Bird</a></li>
+            <li><a href="/samples/games/Snake/">Snake</a></li>
+            <li><a href="/samples/games/SpaceWar/">Space War</a></li>
+          </ol>
+        </li>
+    
+        <li>
+          <h1>DSA Simulations</h1>
+          <ol>
+            <li><a href="/samples/dsa-simulation/knapsack-DP/">0-1 Knapsack DP</a></li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+
       <canvas class="canvas" id="canvas"></canvas>
     </div>
   <script type="module" src="/main.ts"></script>

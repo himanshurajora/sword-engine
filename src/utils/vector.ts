@@ -165,6 +165,19 @@ export class Vector implements Vector {
             this.y = center.y + (this.x - center.x) * Math.sin(angle) + (this.y - center.y) * Math.cos(angle)
     }
 
+    /**
+     * @function createInstance
+     * @param {number} x
+     * @param {number} y
+     * @returns {Vector}
+     * @description A function to create a new vector instance from given co-ordinates
+     * @memberof Vector
+     */
+
+    public static createInstance(x: number, y: number): Vector {
+        return new Vector(x, y)
+    }
+
 }
 
 /**

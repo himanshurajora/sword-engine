@@ -9,22 +9,22 @@ export interface global {
 export class Variable {
     public position
     public name 
-    public type
     public value
-    public isConst
-    constructor(position : Vector, name : string, type : string, value : number, isConst : string) {
+    public color
+    constructor(position : Vector, name : string, value : number) {
         this.position = position;
         this.name = name;
-        this.type = type;
         this.value = value;
-        this.isConst = isConst;
+        this.color = utils.getRandomLightColor();
+        console.log(this)
+    
     }
 
     public draw() {
-        shapeutils.setFillStyle(utils.getRandomLightColor());
-        shapeutils.drawRectangle(this.position, shapeutils.measureText(this.name + " : " + this.value.toString()).width, 50);
+        shapeutils.setFillStyle(this.color)
         globalThis.context.font = "20px Arial";
-        globalThis.context.fillStyle = utils.getRadomDarkColor();
-        globalThis.context.fillText(this.value.toString(), 10, 20);
+        shapeutils.drawRectangle(this.position, shapeutils.measureText("     " + this.value.toString()).width, 50);
+        globalThis.context.fillStyle = "red"
+        globalThis.context.fillText(this.value.toString(), this.position.x + shapeutils.measureText("  ").width, this.position.y + 30 );
     }
 }
