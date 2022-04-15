@@ -13,7 +13,8 @@ module.exports = defineConfig({
         simulation2: resolve(__dirname, 'samples/simulations/BeziereCurves/index.html'),
         simulation3: resolve(__dirname, 'samples/simulations/SolorSystem/index.html'),
         dsaSimulation1: resolve(__dirname, 'samples/dsa-simulation/knapsack-DP/index.html'),
-        dsaSimulation2: resolve(__dirname, 'samples/dsa-simulation/array-rotation/index.html')
+        dsaSimulation2: resolve(__dirname, 'samples/dsa-simulation/array-rotation/index.html'),
+        dsaSimulation3: resolve(__dirname, 'samples/dsa-simulation/playfair/index.html')
       }
     }
   }

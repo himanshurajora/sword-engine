@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sword Engine</title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+      .data{
+        position: absolute;
+        right: 0;
+        margin: 20px;
+      }
+
+      .data input[type=text]{
+        padding: 10px;
+        display: block;
+        margin: 10px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="data">
+        <label for="">key</label>
+        <input type="text" id="key" placeholder="enter key" value="himanshu">
+        <label for="">data</label>
+        <input type="text" id="text" placeholder="enter text" value="somedata">
+        <label for="">the output</label>
+        <h3 id="output"></h3>
+      </div>
+      <canvas class="canvas" id="canvas"></canvas>
+    </div>
+    <script type="module" src="./script.ts"></script>
+  </body>
+</html>
