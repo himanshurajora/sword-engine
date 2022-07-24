@@ -10,7 +10,6 @@ import { Vector } from "./vector";
  * @param {Vector} p1 - second point
  * @param {Vector} p2 - third point
  */
-
 export class BezierCurve {
     public p0: Vector
     public p1: Vector
